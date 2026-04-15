@@ -42,6 +42,13 @@
                         'label' => 'Program',
                     ],
                     [
+                        'route' => 'admin.contact-messages.index',
+                        'active' => 'admin.contact-messages.*',
+                        'icon' => 'contact',
+                        'label' => 'Kontak Management',
+                        'badge' => ($adminUnreadContactMessages ?? 0) > 0 ? $adminUnreadContactMessages : null,
+                    ],
+                    [
                         'route' => 'admin.teachers.index',
                         'active' => 'admin.teachers.*',
                         'icon' => 'teachers',
@@ -102,9 +109,14 @@
                                     <a href="{{ $href }}" class="group flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-semibold {{ $isActive ? 'bg-yellow-400 text-gray-900' : 'text-gray-200 hover:bg-gray-900' }}" @if ($isActive) aria-current="page" @endif>
                                         <x-admin.icon name="{{ $item['icon'] }}" class="w-5 h-5 {{ $isActive ? 'text-gray-900' : 'text-gray-300 group-hover:text-gray-100' }}" />
                                         <span>{{ $item['label'] }}</span>
-                                        @if ($isActive)
-                                            <span class="ml-auto h-2.5 w-2.5 rounded-full bg-gray-900"></span>
+                                        <span class="ml-auto flex items-center gap-2">
+                                        @if (! empty($item['badge']))
+                                            <span class="inline-flex min-w-[1.5rem] items-center justify-center rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-900">{{ $item['badge'] }}</span>
                                         @endif
+                                        @if ($isActive)
+                                            <span class="h-2.5 w-2.5 rounded-full bg-gray-900"></span>
+                                        @endif
+                                        </span>
                                     </a>
                                 @endforeach
                             </div>
@@ -161,9 +173,14 @@
                                             <a href="{{ $href }}" class="group flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold {{ $isActive ? 'bg-yellow-400 text-gray-900' : 'text-gray-200 hover:bg-gray-900' }}">
                                                 <x-admin.icon name="{{ $item['icon'] }}" class="w-5 h-5 {{ $isActive ? 'text-gray-900' : 'text-gray-300 group-hover:text-gray-100' }}" />
                                                 <span>{{ $item['label'] }}</span>
-                                                @if ($isActive)
-                                                    <span class="ml-auto h-2.5 w-2.5 rounded-full bg-gray-900"></span>
+                                                <span class="ml-auto flex items-center gap-2">
+                                                @if (! empty($item['badge']))
+                                                    <span class="inline-flex min-w-[1.5rem] items-center justify-center rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-900">{{ $item['badge'] }}</span>
                                                 @endif
+                                                @if ($isActive)
+                                                    <span class="h-2.5 w-2.5 rounded-full bg-gray-900"></span>
+                                                @endif
+                                                </span>
                                             </a>
                                         @endforeach
                                     </div>

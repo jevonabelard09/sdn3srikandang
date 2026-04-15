@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AccountController as AdminAccountController;
 use App\Http\Controllers\Admin\AchievementController as AdminAchievementController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\ContactMessageController as AdminContactMessageController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProgramController as AdminProgramController;
@@ -48,6 +49,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/akun', [AdminAccountController::class, 'edit'])->name('account.edit');
         Route::post('/akun', [AdminAccountController::class, 'update'])->name('account.update');
 
+        Route::get('/kontak', [AdminContactMessageController::class, 'index'])->name('contact-messages.index');
+        Route::get('/kontak/{contactMessage}', [AdminContactMessageController::class, 'show'])->name('contact-messages.show');
+        Route::patch('/kontak/{contactMessage}', [AdminContactMessageController::class, 'update'])->name('contact-messages.update');
+        Route::delete('/kontak/{contactMessage}', [AdminContactMessageController::class, 'destroy'])->name('contact-messages.destroy');
+
         Route::get('/guru', [AdminTeacherController::class, 'index'])->name('teachers.index');
         Route::post('/guru', [AdminTeacherController::class, 'store'])->name('teachers.store');
         Route::get('/guru/{teacher}/edit', [AdminTeacherController::class, 'edit'])->name('teachers.edit');
@@ -71,5 +77,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/galeri/{galleryImage}', [AdminGalleryController::class, 'destroy'])->name('gallery.destroy');
     });
 });
-
 
